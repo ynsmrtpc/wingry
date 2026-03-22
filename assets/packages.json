@@ -1,0 +1,134 @@
+[
+  {
+    "id": "dev_pack",
+    "title": "Developer Pack",
+    "description": "Essential tools for coding, database management, and software development.",
+    "icon": "👨‍💻",
+    "apps": [
+      {
+        "Id": "Microsoft.VisualStudioCode",
+        "Name": "Visual Studio Code"
+      },
+      {
+        "Id": "Git.Git",
+        "Name": "Git"
+      },
+      {
+        "Id": "Python.Python.3.11",
+        "Name": "Python 3.11"
+      },
+      {
+        "Id": "OpenJS.NodeJS",
+        "Name": "Node.js"
+      },
+      {
+        "Id": "Docker.DockerDesktop",
+        "Name": "Docker Desktop"
+      },
+      {
+        "Id": "Microsoft.WindowsTerminal",
+        "Name": "Windows Terminal"
+      },
+      {
+        "Id": "dbeaver.dbeaver",
+        "Name": "DBeaver Community"
+      },
+      {
+        "Id": "Postman.Postman",
+        "Name": "Postman"
+      }
+    ]
+  },
+  {
+    "id": "gamer_pack",
+    "title": "Gamer Pack",
+    "description": "Must-have platforms, classic libraries, and hardware utilities for gamers.",
+    "icon": "🎮",
+    "apps": [
+      {
+        "Id": "Valve.Steam",
+        "Name": "Steam"
+      },
+      {
+        "Id": "EpicGames.EpicGamesLauncher",
+        "Name": "Epic Games Launcher"
+      },
+      {
+        "Id": "GOG.Galaxy",
+        "Name": "GOG Galaxy"
+      },
+      {
+        "Id": "Discord.Discord",
+        "Name": "Discord"
+      },
+      {
+        "Id": "OBSProject.OBSStudio",
+        "Name": "OBS Studio"
+      },
+      {
+        "Id": "CPUID.HWMonitor",
+        "Name": "HWMonitor"
+      }
+    ]
+  },
+  {
+    "id": "office_pack",
+    "title": "Office Pack",
+    "description": "Productivity applications, team communication, and system power tools.",
+    "icon": "💼",
+    "apps": [
+      {
+        "Id": "Microsoft.Office",
+        "Name": "Microsoft Office"
+      },
+      {
+        "Id": "Zoom.Zoom",
+        "Name": "Zoom"
+      },
+      {
+        "Id": "SlackTechnologies.Slack",
+        "Name": "Slack"
+      },
+      {
+        "Id": "Notion.Notion",
+        "Name": "Notion"
+      },
+      {
+        "Id": "Microsoft.PowerToys",
+        "Name": "PowerToys"
+      }
+    ]
+  },
+  {
+    "id": "creator_pack",
+    "title": "Creator Pack",
+    "description": "Creative tools for modern design, illustration, and heavy-duty video editing.",
+    "icon": "🎨",
+    "apps": [
+      {
+        "Id": "Figma.Figma",
+        "Name": "Figma"
+      },
+      {
+        "Id": "BlenderFoundation.Blender",
+        "Name": "Blender"
+      },
+      {
+        "Id": "KDE.Krita",
+        "Name": "Krita"
+      },
+      {
+        "Id": "GIMP.GIMP",
+        "Name": "GIMP"
+      },
+      {
+        "Id": "BlackmagicDesign.DaVinciResolve",
+        "Name": "DaVinci Resolve"
+      },
+      {
+        "Id": "Inkscape.Inkscape",
+        "Name": "Inkscape"
+      }
+    ]
+  }
+]
