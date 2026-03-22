@@ -2,7 +2,7 @@
 
 **Wingy** is a modern, fast, and beautiful GUI for the Windows Package Manager (**winget**), designed specifically with the **Windows 11** design language (Fluent Design).
 
-![Wingy UI Example](<img width="1100" height="900" alt="wingy" src="https://github.com/user-attachments/assets/61324725-7e7c-4e31-96b2-bec74930d59b" />)
+<img width="1100" height="900" alt="wingy" src="https://github.com/user-attachments/assets/61324725-7e7c-4e31-96b2-bec74930d59b" />
 
 ## ✨ Features
 
