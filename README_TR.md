@@ -2,7 +2,7 @@
 
 **Wingy**, Windows Paket Yöneticisi (**winget**) için özel olarak **Windows 11** tasarım dili (Fluent Design) ile geliştirilmiş modern, hızlı ve şık bir grafik arayüzüdür.
 
-![Wingy UI Örneği](https://via.placeholder.com/800x450/1E1E1E/FFFFFF?text=Wingy+Modern+UI+Önizleme)
+<img width="1100" height="900" alt="wingy" src="https://github.com/user-attachments/assets/61324725-7e7c-4e31-96b2-bec74930d59b" />
 
 ## ✨ Özellikler
 
