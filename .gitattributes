@@ -1,0 +1,5 @@
+# GitHub dil istatistiği: üçüncü taraf veri ve belgeler sayılmasın
+src/Wingry/Data/Win11Debloat/** linguist-vendored
+docs/** linguist-documentation
+*.png binary
+*.ico binary
