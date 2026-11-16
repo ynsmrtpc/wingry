@@ -1,0 +1,41 @@
+<Page
+    x:Class="Wingry.Pages.PowerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:tk="using:CommunityToolkit.WinUI.Controls">
+
+    <ScrollViewer>
+        <StackPanel MaxWidth="{StaticResource PageMaxWidth}" Padding="{StaticResource PagePadding}" Spacing="{StaticResource SettingsCardSpacing}">
+            <TextBlock Style="{StaticResource PageTitle}" Text="Güç ve pil" />
+            <TextBlock Style="{StaticResource PageSubtitle}" Text="Güç planı performans ile enerji tüketimi arasındaki dengeyi belirler. Masaüstünde 'Yüksek' ya da 'Nihai performans', dizüstünde 'Dengeli' önerilir." />
+
+            <TextBlock Style="{StaticResource SectionHeader}" Margin="1,0,0,8" Text="Güç planı" />
+            <tk:SettingsCard Header="Etkin plan" Description="Seçtiğiniz plan hemen etkin olur.">
+                <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xE945;" /></tk:SettingsCard.HeaderIcon>
+                <ComboBox x:Name="Plans" MinWidth="260" SelectionChanged="OnPlan" />
+            </tk:SettingsCard>
+            <tk:SettingsCard x:Name="UltimateCard" Header="Nihai performans planını ekle" Description="Windows'ta gizli duran, gecikmeleri en aza indiren plan. İş istasyonları ve oyun için; dizüstünde pili hızla tüketir.">
+                <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xEC4A;" /></tk:SettingsCard.HeaderIcon>
+                <Button Content="Ekle" Click="OnUltimate" />
+            </tk:SettingsCard>
+
+            <TextBlock Style="{StaticResource SectionHeader}" Text="Hazırda bekletme" />
+            <tk:SettingsCard x:Name="HibCard" Header="Hazırda bekletme">
+                <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xE708;" /></tk:SettingsCard.HeaderIcon>
+                <ToggleSwitch x:Name="HibToggle" OnContent="Açık" OffContent="Kapalı" Toggled="OnHib" />
+            </tk:SettingsCard>
+
+            <StackPanel x:Name="BatterySection" Spacing="{StaticResource SettingsCardSpacing}">
+                <TextBlock Style="{StaticResource SectionHeader}" Text="Pil" />
+                <tk:SettingsCard x:Name="BatteryCard" Header="Pil durumu">
+                    <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xE83F;" /></tk:SettingsCard.HeaderIcon>
+                    <TextBlock x:Name="BatteryText" Style="{StaticResource SubtitleTextBlockStyle}" />
+                </tk:SettingsCard>
+                <tk:SettingsCard Header="Pil sağlık raporu" Description="Windows'un ayrıntılı pil raporu: tasarım kapasitesi ile şimdiki tam şarj kapasitesi, şarj döngüsü, son 3 günün kullanımı. Tarayıcıda açılır.">
+                    <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xE9D9;" /></tk:SettingsCard.HeaderIcon>
+                    <Button Content="Raporu oluştur" Click="OnBatteryReport" />
+                </tk:SettingsCard>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

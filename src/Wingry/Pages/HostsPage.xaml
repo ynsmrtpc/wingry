@@ -1,0 +1,43 @@
+<Page
+    x:Class="Wingry.Pages.HostsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:tk="using:CommunityToolkit.WinUI.Controls">
+
+    <Grid MaxWidth="{StaticResource PageMaxWidth}" Padding="36,8,36,24" RowSpacing="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Style="{StaticResource PageTitle}" Text="Hosts dosyası" />
+        <TextBlock Grid.Row="1" Style="{StaticResource PageSubtitle}" Margin="0" Text="Alan adlarını belirli adreslere yönlendirir ya da engeller. Her satır: IP adresi, boşluk, alan adı (ör. 0.0.0.0 reklam.ornek.com). # ile başlayan satırlar açıklamadır. Kaydetmeden önce eski dosya yedeklenir." />
+
+        <tk:SettingsCard Grid.Row="2" x:Name="BlockCard" Header="Reklam ve izleyici engelleme listesi" Description="StevenBlack birleşik listesi (reklam + zararlı alan adları, ~80 bin satır). Tüm tarayıcı ve uygulamalarda çalışır.">
+            <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xE8F8;" /></tk:SettingsCard.HeaderIcon>
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <ProgressRing x:Name="BlockRing" Width="20" Height="20" IsActive="False" />
+                <Button x:Name="BlockRemove" Content="Kaldır" Click="OnBlockRemove" />
+                <Button x:Name="BlockAdd" Style="{StaticResource AccentButtonStyle}" Content="Ekle / güncelle" Click="OnBlockAdd" />
+            </StackPanel>
+        </tk:SettingsCard>
+
+        <TextBlock Grid.Row="3" Style="{StaticResource SectionHeader}" Margin="1,8,0,0" Text="Kendi kayıtlarınız" />
+        <TextBox x:Name="Editor" Grid.Row="4" AcceptsReturn="True" TextWrapping="NoWrap" IsSpellCheckEnabled="False"
+                 FontFamily="Cascadia Mono,Consolas" FontSize="13" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                 AutomationProperties.Name="Hosts dosyası içeriği" TextChanged="OnEdit" />
+        <Grid Grid.Row="5" ColumnSpacing="8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="Status" VerticalAlignment="Center" Style="{StaticResource Caption}" />
+            <Button Grid.Column="1" Content="Geri al" Click="OnRevert" />
+            <Button x:Name="SaveBtn" Grid.Column="2" Style="{StaticResource AccentButtonStyle}" Content="Kaydet" Click="OnSave" IsEnabled="False" />
+        </Grid>
+    </Grid>
+</Page>

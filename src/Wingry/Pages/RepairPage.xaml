@@ -1,0 +1,44 @@
+<Page
+    x:Class="Wingry.Pages.RepairPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:tk="using:CommunityToolkit.WinUI.Controls">
+
+    <ScrollViewer>
+        <StackPanel MaxWidth="{StaticResource PageMaxWidth}" Padding="{StaticResource PagePadding}" Spacing="{StaticResource SettingsCardSpacing}">
+            <TextBlock Style="{StaticResource PageTitle}" Text="Sistem onarımı" />
+            <TextBlock Style="{StaticResource PageSubtitle}" Text="Disk sağlığı ve Windows'un kendi onarım araçları. Onarımlar yönetici izni ister ve arka planda çalışır; bu sırada Wingry'yi kullanmaya devam edebilirsiniz." />
+
+            <TextBlock Style="{StaticResource SectionHeader}" Margin="1,0,0,8" Text="Diskler" />
+            <StackPanel x:Name="Disks" Spacing="{StaticResource SettingsCardSpacing}" />
+
+            <TextBlock Style="{StaticResource SectionHeader}" Text="Windows dosyalarını onar" />
+            <InfoBar IsOpen="True" IsClosable="False" Severity="Informational" Title="Önerilen sıra"
+                     Message="Önce 'Görüntüyü onar (DISM)', ardından 'Sistem dosyalarını denetle (SFC)'. DISM bozuk bileşenleri Windows Update'ten yeniler, SFC de onları kullanarak sistem dosyalarını düzeltir." />
+            <tk:SettingsCard x:Name="DismCard" Header="Windows görüntüsünü onar (DISM /RestoreHealth)" Description="10–30 dakika sürebilir, internet bağlantısı gerekir.">
+                <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xE90F;" /></tk:SettingsCard.HeaderIcon>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <ProgressRing x:Name="DismRing" Width="20" Height="20" IsActive="False" />
+                    <Button x:Name="DismBtn" Content="Başlat" Click="OnDism" />
+                </StackPanel>
+            </tk:SettingsCard>
+            <tk:SettingsCard x:Name="SfcCard" Header="Sistem dosyalarını denetle (SFC /scannow)" Description="Bozuk ya da değiştirilmiş Windows dosyalarını bulup düzeltir. 5–15 dakika.">
+                <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xE9F5;" /></tk:SettingsCard.HeaderIcon>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <ProgressRing x:Name="SfcRing" Width="20" Height="20" IsActive="False" />
+                    <Button x:Name="SfcBtn" Content="Başlat" Click="OnSfc" />
+                </StackPanel>
+            </tk:SettingsCard>
+            <tk:SettingsCard x:Name="CleanCard" Header="Bileşen deposunu temizle (DISM /StartComponentCleanup)" Description="Eski güncelleme sürümlerini kaldırıp WinSxS klasörünü küçültür. Kurulu güncellemeler geri alınamaz hâle gelir.">
+                <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xEA99;" /></tk:SettingsCard.HeaderIcon>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <ProgressRing x:Name="CleanRing" Width="20" Height="20" IsActive="False" />
+                    <Button x:Name="CleanBtn" Content="Başlat" Click="OnClean" />
+                </StackPanel>
+            </tk:SettingsCard>
+            <tk:SettingsCard Header="Onarım günlükleri" Description="CBS.log (SFC) ve dism.log ayrıntıları içerir." IsClickEnabled="True" Click="OnLogs">
+                <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xE9F9;" /></tk:SettingsCard.HeaderIcon>
+            </tk:SettingsCard>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

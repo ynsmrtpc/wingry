@@ -1,0 +1,119 @@
+<Page
+    x:Class="Wingry.Pages.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:tk="using:CommunityToolkit.WinUI.Controls">
+
+    <ScrollViewer>
+        <StackPanel MaxWidth="{StaticResource PageMaxWidth}" Padding="{StaticResource PagePadding}" Spacing="{StaticResource SettingsCardSpacing}">
+            <TextBlock Style="{StaticResource PageTitle}" Text="Ayarlar" Margin="0,24,0,20" />
+
+            <TextBlock Style="{StaticResource SectionHeader}" Margin="1,0,0,8" Text="Görünüm" />
+            <tk:SettingsCard Header="Tema" Description="Windows ayarını izleyebilir ya da sabitleyebilirsiniz.">
+                <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xE790;" /></tk:SettingsCard.HeaderIcon>
+                <ComboBox x:Name="Theme" MinWidth="160" SelectionChanged="OnTheme">
+                    <x:String>Sistem</x:String>
+                    <x:String>Açık</x:String>
+                    <x:String>Koyu</x:String>
+                </ComboBox>
+            </tk:SettingsCard>
+
+            <TextBlock Style="{StaticResource SectionHeader}" Text="Başlangıç" />
+            <tk:SettingsExpander x:Name="AutoExpander" Header="Windows açılınca başlat" Description="Oturum açtığınızda Wingry kendiliğinden açılır. Görev Yöneticisi &gt; Başlangıç uygulamaları'nda da görünür.">
+                <tk:SettingsExpander.HeaderIcon><FontIcon Glyph="&#xE7E8;" /></tk:SettingsExpander.HeaderIcon>
+                <tk:SettingsExpander.Content>
+                    <ToggleSwitch x:Name="AutoStartToggle" OnContent="Açık" OffContent="Kapalı" Toggled="OnAutoStart" />
+                </tk:SettingsExpander.Content>
+                <tk:SettingsExpander.Items>
+                    <tk:SettingsCard Header="Küçültülmüş başlat" Description="Açılışta pencere görev çubuğunda simge durumunda bekler; RAM eşiği ve güncelleme denetimi arka planda çalışır.">
+                        <ToggleSwitch x:Name="AutoMinToggle" OnContent="Açık" OffContent="Kapalı" Toggled="OnAutoMin" />
+                    </tk:SettingsCard>
+                </tk:SettingsExpander.Items>
+            </tk:SettingsExpander>
+
+            <TextBlock Style="{StaticResource SectionHeader}" Text="Uygulama yönetimi" />
+            <tk:SettingsCard Header="Sessiz kurulum" Description="Kurulum sihirbazları gösterilmeden, varsayılan seçeneklerle kurar.">
+                <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xE896;" /></tk:SettingsCard.HeaderIcon>
+                <ToggleSwitch x:Name="Silent" Toggled="OnSilent" />
+            </tk:SettingsCard>
+            <tk:SettingsCard Header="Kurulumları tek yönetici onayıyla arka planda yap" Description="Kurulum, güncelleme ve kaldırma işleri başta bir kez izin alır, sonra sessizce sürer. Kapalıyken her kurulum programı kendi iznini ister (UAC penceresi görev çubuğunda kalabilir).">
+                <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xEA18;" /></tk:SettingsCard.HeaderIcon>
+                <ToggleSwitch x:Name="Batch" Toggled="OnBatch" />
+            </tk:SettingsCard>
+            <tk:SettingsCard Header="Microsoft Store uygulamalarını da denetle" Description="Store'dan kurulanların güncellemeleri de taranır. Tarama birkaç saniye uzar.">
+                <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xE719;" /></tk:SettingsCard.HeaderIcon>
+                <ToggleSwitch x:Name="Store" Toggled="OnStore" />
+            </tk:SettingsCard>
+            <tk:SettingsExpander x:Name="IgnoredExpander" Header="Yoksayılan güncellemeler" Description="Bu paketler güncelleme listesinde ve zamanlanmış güncellemede atlanır.">
+                <tk:SettingsExpander.HeaderIcon><FontIcon Glyph="&#xE7BA;" /></tk:SettingsExpander.HeaderIcon>
+                <tk:SettingsExpander.Items>
+                    <tk:SettingsCard ContentAlignment="Left">
+                        <StackPanel x:Name="IgnoredList" Spacing="6" />
+                    </tk:SettingsCard>
+                </tk:SettingsExpander.Items>
+            </tk:SettingsExpander>
+
+            <TextBlock Style="{StaticResource SectionHeader}" Text="Güvenlik ağı" />
+            <tk:SettingsCard Header="Sistem geri yükleme noktası oluştur" Description="İnce ayarlardan önce önerilir. Yönetici izni ister; birkaç dakika sürebilir.">
+                <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xE81C;" /></tk:SettingsCard.HeaderIcon>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <ProgressRing x:Name="RpRing" Width="20" Height="20" IsActive="False" />
+                    <Button x:Name="RpButton" Content="Oluştur" Click="OnRestorePoint" />
+                </StackPanel>
+            </tk:SettingsCard>
+            <tk:SettingsExpander x:Name="BackupExpander" Header="Kayıt defteri yedekleri" Description="İnce ayar uygulanmadan hemen önce değişen değerlerin kopyası alınır.">
+                <tk:SettingsExpander.HeaderIcon><FontIcon Glyph="&#xE777;" /></tk:SettingsExpander.HeaderIcon>
+                <tk:SettingsExpander.Content>
+                    <Button Content="Klasörü aç" Click="OnOpenBackups" />
+                </tk:SettingsExpander.Content>
+                <tk:SettingsExpander.Items>
+                    <tk:SettingsCard ContentAlignment="Left">
+                        <StackPanel x:Name="BackupList" Spacing="6" />
+                    </tk:SettingsCard>
+                </tk:SettingsExpander.Items>
+            </tk:SettingsExpander>
+            <tk:SettingsCard Header="Günlük kayıtları" Description="Yapılan her işlem ve hata buraya yazılır." IsClickEnabled="True" Click="OnOpenLogs">
+                <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xE9F9;" /></tk:SettingsCard.HeaderIcon>
+            </tk:SettingsCard>
+
+            <TextBlock Style="{StaticResource SectionHeader}" Text="Wingry güncellemesi" />
+            <tk:SettingsExpander x:Name="UpdExpander" Header="Uygulama güncellemesi">
+                <tk:SettingsExpander.HeaderIcon><FontIcon Glyph="&#xE895;" /></tk:SettingsExpander.HeaderIcon>
+                <tk:SettingsExpander.Description>
+                    <TextBlock x:Name="UpdStatus" Style="{StaticResource Caption}" />
+                </tk:SettingsExpander.Description>
+                <tk:SettingsExpander.Content>
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <ProgressRing x:Name="UpdRing" Width="20" Height="20" IsActive="False" />
+                        <Button x:Name="UpdCheck" Content="Güncellemeleri denetle" Click="OnUpdCheck" />
+                        <Button x:Name="UpdInstall" Style="{StaticResource AccentButtonStyle}" Content="İndir ve yükle" Click="OnUpdInstall" Visibility="Collapsed" />
+                    </StackPanel>
+                </tk:SettingsExpander.Content>
+                <tk:SettingsExpander.Items>
+                    <tk:SettingsCard x:Name="UpdNotesCard" ContentAlignment="Left" Visibility="Collapsed">
+                        <StackPanel Spacing="6" MaxWidth="760">
+                            <TextBlock x:Name="UpdNotesTitle" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                            <TextBlock x:Name="UpdNotes" TextWrapping="Wrap" IsTextSelectionEnabled="True" Style="{StaticResource Caption}" />
+                            <ProgressBar x:Name="UpdProgress" Maximum="1" Visibility="Collapsed" />
+                        </StackPanel>
+                    </tk:SettingsCard>
+                    <tk:SettingsCard Header="Açılışta denetle" Description="Günde en çok bir kez yeni sürüme bakılır; varsa bildirim gösterilir.">
+                        <ToggleSwitch x:Name="UpdAuto" Toggled="OnUpdAuto" />
+                    </tk:SettingsCard>
+                </tk:SettingsExpander.Items>
+            </tk:SettingsExpander>
+
+            <TextBlock Style="{StaticResource SectionHeader}" Text="Hakkında" />
+            <tk:SettingsExpander Header="Wingry" x:Name="About">
+                <tk:SettingsExpander.HeaderIcon>
+                    <BitmapIcon UriSource="ms-appx:///Assets/logo.png" ShowAsMonochrome="False" />
+                </tk:SettingsExpander.HeaderIcon>
+                <tk:SettingsExpander.Items>
+                    <tk:SettingsCard ContentAlignment="Left">
+                        <TextBlock x:Name="AboutText" TextWrapping="Wrap" IsTextSelectionEnabled="True" Style="{StaticResource Caption}" />
+                    </tk:SettingsCard>
+                </tk:SettingsExpander.Items>
+            </tk:SettingsExpander>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

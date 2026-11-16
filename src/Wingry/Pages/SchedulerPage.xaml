@@ -1,0 +1,114 @@
+<Page
+    x:Class="Wingry.Pages.SchedulerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:tk="using:CommunityToolkit.WinUI.Controls">
+
+    <ScrollViewer x:Name="Scroller">
+        <StackPanel MaxWidth="{StaticResource PageMaxWidth}" Padding="{StaticResource PagePadding}">
+            <TextBlock Style="{StaticResource PageTitle}" Text="Zamanlayıcılar" />
+            <TextBlock Style="{StaticResource PageSubtitle}" Text="Wingry kapalıyken de çalışan Windows Görev Zamanlayıcı görevleri. Görevler 'Görev Zamanlayıcı Kitaplığı > Wingry' altında görünür." />
+
+            <!-- RAM -->
+            <TextBlock Style="{StaticResource SectionHeader}" Text="RAM temizleme" />
+            <tk:SettingsExpander x:Name="RamExpander" Header="Zamanlanmış bellek temizliği" IsExpanded="True">
+                <tk:SettingsExpander.HeaderIcon><FontIcon Glyph="&#xEEA0;" /></tk:SettingsExpander.HeaderIcon>
+                <tk:SettingsExpander.Description>
+                    <TextBlock x:Name="RamStatus" Style="{StaticResource Caption}" Text="Durum okunuyor…" />
+                </tk:SettingsExpander.Description>
+                <tk:SettingsExpander.Content>
+                    <ProgressRing x:Name="RamRing" Width="20" Height="20" IsActive="False" />
+                </tk:SettingsExpander.Content>
+                <tk:SettingsExpander.Items>
+                    <tk:SettingsCard Header="Sıklık">
+                        <ComboBox x:Name="RamInterval" MinWidth="180" SelectedIndex="2" SelectionChanged="OnRamOptionChanged">
+                            <x:String>15 dakikada bir</x:String>
+                            <x:String>30 dakikada bir</x:String>
+                            <x:String>Saatte bir</x:String>
+                            <x:String>2 saatte bir</x:String>
+                            <x:String>4 saatte bir</x:String>
+                            <x:String>8 saatte bir</x:String>
+                        </ComboBox>
+                    </tk:SettingsCard>
+                    <tk:SettingsCard Header="Derin temizlik" Description="Bekleme listesi ve dosya önbelleği de boşaltılır. Görev en yüksek yetkiyle çalışır; oluştururken bir kez yönetici izni istenir.">
+                        <ToggleSwitch x:Name="RamDeep" Toggled="OnRamOptionChanged" />
+                    </tk:SettingsCard>
+                    <tk:SettingsCard Header="Her temizlikten sonra bildirim göster">
+                        <ToggleSwitch x:Name="RamNotify" />
+                    </tk:SettingsCard>
+                    <tk:SettingsCard>
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button x:Name="RamRemove" Content="Görevi kaldır" Click="OnRamRemove" />
+                            <Button x:Name="RamRun" Content="Şimdi çalıştır" Click="OnRamRun" />
+                            <Button Style="{StaticResource AccentButtonStyle}" Content="Kaydet ve etkinleştir" Click="OnRamSave" />
+                        </StackPanel>
+                    </tk:SettingsCard>
+                </tk:SettingsExpander.Items>
+            </tk:SettingsExpander>
+
+            <InfoBar
+                x:Name="RamWarn"
+                Margin="0,8,0,0"
+                IsClosable="False"
+                Severity="Warning"
+                Title="Bu sıklık bilgisayarı yavaşlatabilir" />
+
+            <!-- Güncelleme -->
+            <TextBlock Style="{StaticResource SectionHeader}" Text="Uygulama güncelleme" />
+            <tk:SettingsExpander x:Name="UpdExpander" Header="Zamanlanmış uygulama güncellemesi" IsExpanded="True">
+                <tk:SettingsExpander.HeaderIcon><FontIcon Glyph="&#xE895;" /></tk:SettingsExpander.HeaderIcon>
+                <tk:SettingsExpander.Description>
+                    <TextBlock x:Name="UpdStatus" Style="{StaticResource Caption}" Text="Durum okunuyor…" />
+                </tk:SettingsExpander.Description>
+                <tk:SettingsExpander.Content>
+                    <ProgressRing x:Name="UpdRing" Width="20" Height="20" IsActive="False" />
+                </tk:SettingsExpander.Content>
+                <tk:SettingsExpander.Items>
+                    <tk:SettingsCard Header="Ne zaman">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <ComboBox x:Name="UpdFreq" MinWidth="170" SelectedIndex="1" SelectionChanged="OnFreqChanged">
+                                <x:String>Her gün</x:String>
+                                <x:String>Her hafta</x:String>
+                                <x:String>Oturum açılınca</x:String>
+                            </ComboBox>
+                            <ComboBox x:Name="UpdDay" MinWidth="130" SelectedIndex="0">
+                                <x:String>Pazartesi</x:String>
+                                <x:String>Salı</x:String>
+                                <x:String>Çarşamba</x:String>
+                                <x:String>Perşembe</x:String>
+                                <x:String>Cuma</x:String>
+                                <x:String>Cumartesi</x:String>
+                                <x:String>Pazar</x:String>
+                            </ComboBox>
+                            <TimePicker x:Name="UpdTime" ClockIdentifier="24HourClock" MinuteIncrement="15" />
+                        </StackPanel>
+                    </tk:SettingsCard>
+                    <tk:SettingsCard Header="Ne yapılsın">
+                        <RadioButtons x:Name="UpdMode" SelectedIndex="0" MaxColumns="1">
+                            <x:String>Güncellemeleri sessizce kur, sonucu bildir</x:String>
+                            <x:String>Yalnızca güncelleme olduğunu bildir</x:String>
+                        </RadioButtons>
+                    </tk:SettingsCard>
+                    <tk:SettingsCard Header="Yoksayılanlar" Description="Uygulamalar &gt; Güncellemeler'de 'Yoksay' dediğiniz paketler zamanlanmış güncellemede de atlanır.">
+                        <HyperlinkButton Content="Yoksayılanları yönet" Click="OnIgnored" />
+                    </tk:SettingsCard>
+                    <tk:SettingsCard>
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button x:Name="UpdRemove" Content="Görevi kaldır" Click="OnUpdRemove" />
+                            <Button x:Name="UpdRun" Content="Şimdi çalıştır" Click="OnUpdRun" />
+                            <Button Style="{StaticResource AccentButtonStyle}" Content="Kaydet ve etkinleştir" Click="OnUpdSave" />
+                        </StackPanel>
+                    </tk:SettingsCard>
+                </tk:SettingsExpander.Items>
+            </tk:SettingsExpander>
+
+            <InfoBar
+                Margin="0,24,0,0"
+                IsOpen="True"
+                IsClosable="False"
+                Severity="Informational"
+                Title="Uygulamayı taşırsanız"
+                Message="Görevler Wingry.exe'nin şu anki konumunu çağırır. Klasörü taşırsanız görevleri buradan yeniden kaydedin." />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

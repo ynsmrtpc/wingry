@@ -1,0 +1,50 @@
+<Page
+    x:Class="Wingry.Pages.MigrationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:tk="using:CommunityToolkit.WinUI.Controls">
+
+    <ScrollViewer>
+        <StackPanel MaxWidth="{StaticResource PageMaxWidth}" Padding="{StaticResource PagePadding}" Spacing="{StaticResource SettingsCardSpacing}">
+            <TextBlock Style="{StaticResource PageTitle}" Text="Taşıma ve yedek" />
+            <TextBlock Style="{StaticResource PageSubtitle}" Text="Bu bilgisayarın düzenini tek dosyaya kaydedin: winget ile kurulabilen uygulamalar, uygulanmış ince ayarlar ve açılışta kapatılmış programlar. Yeni bilgisayarda ya da Windows'u yeniden kurduktan sonra içe aktarın; yalnızca eksik olanlar uygulanır. Dosyalarınız ve uygulama ayarları bu dosyaya girmez." />
+
+            <TextBlock Style="{StaticResource SectionHeader}" Margin="1,0,0,8" Text="Dışa aktar" />
+            <tk:SettingsCard Header="Bu bilgisayarın profilini kaydet" Description="Ad ve konumu siz seçersiniz. Dosyayı USB belleğe, buluta ya da e-postaya koyabilirsiniz.">
+                <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xEDE1;" /></tk:SettingsCard.HeaderIcon>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <ProgressRing x:Name="ExportRing" Width="20" Height="20" IsActive="False" />
+                    <Button x:Name="ExportBtn" Style="{StaticResource AccentButtonStyle}" Content="Profili kaydet…" Click="OnExport" />
+                </StackPanel>
+            </tk:SettingsCard>
+
+            <TextBlock Style="{StaticResource SectionHeader}" Text="İçe aktar" />
+            <tk:SettingsCard Header="Profil dosyasından kur" Description="Önce ne yapılacağı gösterilir, onayınızla uygulanır.">
+                <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xE8B5;" /></tk:SettingsCard.HeaderIcon>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                    <ProgressRing x:Name="ImportRing" Width="20" Height="20" IsActive="False" />
+                    <Button x:Name="ImportBtn" Content="Profil seç…" Click="OnImport" />
+                </StackPanel>
+            </tk:SettingsCard>
+
+            <Border x:Name="PlanCard" Style="{StaticResource Card}" Margin="0,8,0,0" Visibility="Collapsed">
+                <StackPanel Spacing="10">
+                    <TextBlock x:Name="PlanTitle" Style="{StaticResource BodyStrongTextBlockStyle}" />
+                    <TextBlock x:Name="PlanSource" Style="{StaticResource Caption}" />
+                    <CheckBox x:Name="ChkApps" IsChecked="True" />
+                    <TextBlock x:Name="AppsList" Margin="28,-6,0,0" Style="{StaticResource Caption}" TextWrapping="Wrap" />
+                    <CheckBox x:Name="ChkTweaks" IsChecked="True" />
+                    <TextBlock x:Name="TweaksList" Margin="28,-6,0,0" Style="{StaticResource Caption}" TextWrapping="Wrap" />
+                    <CheckBox x:Name="ChkStartup" IsChecked="True" />
+                    <TextBlock x:Name="StartupList" Margin="28,-6,0,0" Style="{StaticResource Caption}" TextWrapping="Wrap" />
+                    <CheckBox x:Name="ChkRestore" Content="Önce sistem geri yükleme noktası oluştur" IsChecked="True" />
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Button x:Name="ApplyBtn" Style="{StaticResource AccentButtonStyle}" Content="Uygula" Click="OnApply" />
+                        <Button Content="Vazgeç" Click="OnCancelPlan" />
+                        <TextBlock x:Name="ApplyStatus" VerticalAlignment="Center" Style="{StaticResource Caption}" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

@@ -1,0 +1,144 @@
+<Window
+    x:Class="Wingry.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Wingry">
+    <Window.SystemBackdrop>
+        <MicaBackdrop />
+    </Window.SystemBackdrop>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TitleBar
+            x:Name="AppTitleBar"
+            Title="Wingry"
+            IsBackButtonVisible="True"
+            IsBackButtonEnabled="{x:Bind ContentFrame.CanGoBack, Mode=OneWay}"
+            IsPaneToggleButtonVisible="True"
+            BackRequested="OnBackRequested"
+            PaneToggleRequested="OnPaneToggleRequested">
+            <TitleBar.IconSource>
+                <ImageIconSource ImageSource="ms-appx:///Assets/logo.png" />
+            </TitleBar.IconSource>
+            <TitleBar.Content>
+                <AutoSuggestBox
+                    x:Name="GlobalSearch"
+                    MinWidth="320"
+                    MaxWidth="480"
+                    VerticalAlignment="Center"
+                    PlaceholderText="Ayar, uygulama veya sayfa ara"
+                    QueryIcon="Find"
+                    TextChanged="OnSearchTextChanged"
+                    SuggestionChosen="OnSearchChosen"
+                    QuerySubmitted="OnSearchSubmitted" />
+            </TitleBar.Content>
+            <TitleBar.RightHeader>
+                <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,0,8,0">
+                    <Button
+                        x:Name="AdminButton"
+                        Padding="10,4"
+                        Click="OnAdminClick"
+                        ToolTipService.ToolTip="Yönetici olarak yeniden başlat: her işlemde ayrı izin istenmez">
+                        <StackPanel Orientation="Horizontal" Spacing="6">
+                            <FontIcon FontSize="14" Glyph="&#xEA18;" />
+                            <TextBlock x:Name="AdminText" Text="Yönetici değil" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </TitleBar.RightHeader>
+        </TitleBar>
+
+        <NavigationView
+            x:Name="Nav"
+            Grid.Row="1"
+            IsBackButtonVisible="Collapsed"
+            IsPaneToggleButtonVisible="False"
+            IsSettingsVisible="True"
+            OpenPaneLength="268"
+            PaneDisplayMode="Left"
+            SelectionChanged="OnNavSelectionChanged"
+            IsTitleBarAutoPaddingEnabled="False"
+            PaneOpened="OnPaneChanged"
+            PaneClosed="OnPaneChanged"
+            DisplayModeChanged="OnDisplayModeChanged">
+            <NavigationView.Resources>
+                <!-- Daraltılmış menü sıkışık olmasın: öğe yüksekliği 36 yerine 42 -->
+                <x:Double x:Key="NavigationViewItemOnLeftMinHeight">42</x:Double>
+            </NavigationView.Resources>
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="Genel bakış" Tag="dashboard">
+                    <NavigationViewItem.Icon><FontIcon Glyph="&#xE80F;" /></NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem x:Name="NavApps" Content="Uygulamalar" Tag="apps">
+                    <NavigationViewItem.Icon><FontIcon Glyph="&#xE71D;" /></NavigationViewItem.Icon>
+                    <NavigationViewItem.InfoBadge>
+                        <InfoBadge x:Name="UpdateBadge" Visibility="Collapsed" />
+                    </NavigationViewItem.InfoBadge>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Bellek (RAM)" Tag="memory">
+                    <NavigationViewItem.Icon><FontIcon Glyph="&#xEEA0;" /></NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Disk alanı" Tag="disk">
+                    <NavigationViewItem.Icon><FontIcon Glyph="&#xEDA2;" /></NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Başlangıç uygulamaları" Tag="startup">
+                    <NavigationViewItem.Icon><FontIcon Glyph="&#xE7E8;" /></NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Hizmetler" Tag="services">
+                    <NavigationViewItem.Icon><FontIcon Glyph="&#xE9F5;" /></NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Zamanlayıcılar" Tag="scheduler">
+                    <NavigationViewItem.Icon><FontIcon Glyph="&#xE823;" /></NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItemSeparator />
+                <NavigationViewItemHeader Content="Araçlar" />
+                <NavigationViewItem Content="Taşıma ve yedek" Tag="migration">
+                    <NavigationViewItem.Icon><FontIcon Glyph="&#xE8F7;" /></NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Sürücüler" Tag="drivers">
+                    <NavigationViewItem.Icon><FontIcon Glyph="&#xE964;" /></NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Ağ" Tag="network">
+                    <NavigationViewItem.Icon><FontIcon Glyph="&#xE968;" /></NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Güç ve pil" Tag="power">
+                    <NavigationViewItem.Icon><FontIcon Glyph="&#xE945;" /></NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Bağlam menüsü" Tag="contextmenu">
+                    <NavigationViewItem.Icon><FontIcon Glyph="&#xE8A9;" /></NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Sistem onarımı" Tag="repair">
+                    <NavigationViewItem.Icon><FontIcon Glyph="&#xE90F;" /></NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Hosts dosyası" Tag="hosts">
+                    <NavigationViewItem.Icon><FontIcon Glyph="&#xE774;" /></NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItemSeparator />
+                <NavigationViewItemHeader x:Name="TweaksHeader" Content="İnce ayarlar" />
+            </NavigationView.MenuItems>
+            <NavigationView.FooterMenuItems>
+                <NavigationViewItem x:Name="NavOps" Content="İşlemler" Tag="ops">
+                    <NavigationViewItem.Icon><FontIcon Glyph="&#xE896;" /></NavigationViewItem.Icon>
+                    <NavigationViewItem.InfoBadge>
+                        <InfoBadge x:Name="OpsBadge" Visibility="Collapsed" Style="{ThemeResource AttentionValueInfoBadgeStyle}" />
+                    </NavigationViewItem.InfoBadge>
+                </NavigationViewItem>
+            </NavigationView.FooterMenuItems>
+
+            <Frame x:Name="ContentFrame" Navigated="OnNavigated" />
+        </NavigationView>
+
+        <StackPanel
+            x:Name="ToastHost"
+            x:FieldModifier="public"
+            Grid.Row="1"
+            Margin="0,0,24,24"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Spacing="8" />
+    </Grid>
+</Window>

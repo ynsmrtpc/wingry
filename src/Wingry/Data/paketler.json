@@ -1,0 +1,99 @@
+[
+  {
+    "id": "temel",
+    "title": "Temel Paket",
+    "description": "Yeni kurulmuş her bilgisayara: tarayıcı, arşiv, medya oynatıcı, PDF ve metin düzenleyici.",
+    "glyph": "",
+    "apps": [
+      { "id": "Google.Chrome", "name": "Google Chrome" },
+      { "id": "Mozilla.Firefox", "name": "Mozilla Firefox" },
+      { "id": "7zip.7zip", "name": "7-Zip" },
+      { "id": "VideoLAN.VLC", "name": "VLC Media Player" },
+      { "id": "Notepad++.Notepad++", "name": "Notepad++" },
+      { "id": "SumatraPDF.SumatraPDF", "name": "Sumatra PDF" },
+      { "id": "Microsoft.PowerToys", "name": "PowerToys" },
+      { "id": "voidtools.Everything", "name": "Everything" }
+    ]
+  },
+  {
+    "id": "gelistirici",
+    "title": "Geliştirici Paketi",
+    "description": "Kod yazmak, veritabanı ve API ile çalışmak için temel araçlar.",
+    "glyph": "",
+    "apps": [
+      { "id": "Microsoft.VisualStudioCode", "name": "Visual Studio Code" },
+      { "id": "Git.Git", "name": "Git" },
+      { "id": "GitHub.cli", "name": "GitHub CLI" },
+      { "id": "OpenJS.NodeJS.LTS", "name": "Node.js LTS" },
+      { "id": "Python.Python.3.13", "name": "Python 3.13" },
+      { "id": "Microsoft.DotNet.SDK.10", "name": ".NET 10 SDK" },
+      { "id": "Docker.DockerDesktop", "name": "Docker Desktop" },
+      { "id": "Microsoft.WindowsTerminal", "name": "Windows Terminal" },
+      { "id": "Microsoft.PowerShell", "name": "PowerShell 7" },
+      { "id": "dbeaver.dbeaver", "name": "DBeaver" },
+      { "id": "Postman.Postman", "name": "Postman" }
+    ]
+  },
+  {
+    "id": "ofis",
+    "title": "Ofis Paketi",
+    "description": "Belge, toplantı ve ekip iletişimi için üretkenlik uygulamaları.",
+    "glyph": "",
+    "apps": [
+      { "id": "TheDocumentFoundation.LibreOffice", "name": "LibreOffice" },
+      { "id": "Zoom.Zoom", "name": "Zoom" },
+      { "id": "Microsoft.Teams", "name": "Microsoft Teams" },
+      { "id": "SlackTechnologies.Slack", "name": "Slack" },
+      { "id": "Notion.Notion", "name": "Notion" },
+      { "id": "Adobe.Acrobat.Reader.64-bit", "name": "Adobe Acrobat Reader" },
+      { "id": "Greenshot.Greenshot", "name": "Greenshot" }
+    ]
+  },
+  {
+    "id": "oyuncu",
+    "title": "Oyuncu Paketi",
+    "description": "Oyun platformları, sesli sohbet, yayın ve donanım izleme araçları.",
+    "glyph": "",
+    "apps": [
+      { "id": "Valve.Steam", "name": "Steam" },
+      { "id": "EpicGames.EpicGamesLauncher", "name": "Epic Games Launcher" },
+      { "id": "GOG.Galaxy", "name": "GOG Galaxy" },
+      { "id": "Discord.Discord", "name": "Discord" },
+      { "id": "OBSProject.OBSStudio", "name": "OBS Studio" },
+      { "id": "CPUID.HWMonitor", "name": "HWMonitor" },
+      { "id": "Guru3D.Afterburner", "name": "MSI Afterburner" }
+    ]
+  },
+  {
+    "id": "tasarim",
+    "title": "Tasarım ve İçerik Paketi",
+    "description": "Görsel tasarım, illüstrasyon, 3B ve video kurgu araçları.",
+    "glyph": "",
+    "apps": [
+      { "id": "Figma.Figma", "name": "Figma" },
+      { "id": "BlenderFoundation.Blender", "name": "Blender" },
+      { "id": "KDE.Krita", "name": "Krita" },
+      { "id": "GIMP.GIMP.3", "name": "GIMP" },
+      { "id": "Inkscape.Inkscape", "name": "Inkscape" },
+      { "id": "BlackmagicDesign.DaVinciResolve", "name": "DaVinci Resolve" },
+      { "id": "Audacity.Audacity", "name": "Audacity" },
+      { "id": "HandBrake.HandBrake", "name": "HandBrake" }
+    ]
+  },
+  {
+    "id": "sistem",
+    "title": "Sistem Araçları",
+    "description": "Disk, donanım, uzak bağlantı ve sistem bakımı için yardımcı programlar.",
+    "glyph": "",
+    "apps": [
+      { "id": "CrystalDewWorld.CrystalDiskInfo", "name": "CrystalDiskInfo" },
+      { "id": "CPUID.CPU-Z", "name": "CPU-Z" },
+      { "id": "TechPowerUp.GPU-Z", "name": "GPU-Z" },
+      { "id": "AntibodySoftware.WizTree", "name": "WizTree" },
+      { "id": "Rufus.Rufus", "name": "Rufus" },
+      { "id": "RustDesk.RustDesk", "name": "RustDesk" },
+      { "id": "WinSCP.WinSCP", "name": "WinSCP" },
+      { "id": "Microsoft.Sysinternals.ProcessExplorer", "name": "Process Explorer" }
+    ]
+  }
+]

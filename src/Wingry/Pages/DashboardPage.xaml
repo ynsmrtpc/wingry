@@ -1,0 +1,125 @@
+<Page
+    x:Class="Wingry.Pages.DashboardPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ctl="using:Wingry.Controls"
+    xmlns:tk="using:CommunityToolkit.WinUI.Controls"
+    NavigationCacheMode="Required">
+
+    <ScrollViewer>
+        <StackPanel MaxWidth="{StaticResource PageMaxWidth}" Padding="{StaticResource PagePadding}">
+            <TextBlock Style="{StaticResource PageTitle}" Text="Genel bakış" />
+            <TextBlock x:Name="Subtitle" Style="{StaticResource PageSubtitle}" />
+
+            <Grid ColumnSpacing="12" RowSpacing="12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Style="{StaticResource Card}">
+                    <StackPanel Spacing="4">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <FontIcon FontSize="16" Glyph="&#xE950;" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                            <TextBlock Style="{StaticResource Caption}" Text="İşlemci" />
+                        </StackPanel>
+                        <TextBlock x:Name="CpuValue" Style="{StaticResource StatValue}" Text="—" />
+                        <ctl:Sparkline x:Name="CpuSpark" Margin="0,4,0,0" />
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="1" Style="{StaticResource Card}">
+                    <StackPanel Spacing="4">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <FontIcon FontSize="16" Glyph="&#xEEA0;" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                            <TextBlock Style="{StaticResource Caption}" Text="Bellek" />
+                        </StackPanel>
+                        <TextBlock x:Name="MemValue" Style="{StaticResource StatValue}" Text="—" />
+                        <ctl:Sparkline x:Name="MemSpark" Margin="0,4,0,0" />
+                        <TextBlock x:Name="MemDetail" Style="{StaticResource Caption}" />
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="2" Style="{StaticResource Card}">
+                    <StackPanel Spacing="4">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <FontIcon FontSize="16" Glyph="&#xEDA2;" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                            <TextBlock x:Name="DiskLabel" Style="{StaticResource Caption}" Text="Sistem diski" />
+                        </StackPanel>
+                        <TextBlock x:Name="DiskValue" Style="{StaticResource StatValue}" Text="—" />
+                        <ProgressBar x:Name="DiskBar" Margin="0,16,0,12" Maximum="100" />
+                        <TextBlock x:Name="DiskDetail" Style="{StaticResource Caption}" />
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="3" Style="{StaticResource Card}">
+                    <StackPanel Spacing="4">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <FontIcon FontSize="16" Glyph="&#xE895;" Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}" />
+                            <TextBlock Style="{StaticResource Caption}" Text="Uygulama güncellemeleri" />
+                        </StackPanel>
+                        <Grid>
+                            <TextBlock x:Name="UpdValue" Style="{StaticResource StatValue}" Text="—" />
+                            <ProgressRing x:Name="UpdRing" Width="22" Height="22" HorizontalAlignment="Right" IsActive="False" />
+                        </Grid>
+                        <TextBlock x:Name="UpdDetail" Margin="0,8,0,8" Style="{StaticResource Caption}" Text="Taranıyor…" />
+                        <Button x:Name="UpdButton" Content="Güncellemeleri göster" Click="OnShowUpdates" Style="{StaticResource AccentButtonStyle}" />
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <TextBlock Style="{StaticResource SectionHeader}" Text="Hızlı işlemler" />
+            <StackPanel Spacing="{StaticResource SettingsCardSpacing}">
+                <tk:SettingsCard x:Name="RamCard" Header="Belleği temizle" Description="Arka plandaki uygulamaların kullanmadığı belleği geri kazanır" IsClickEnabled="True" Click="OnCleanRam">
+                    <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xEEA0;" /></tk:SettingsCard.HeaderIcon>
+                    <ProgressRing x:Name="RamRing" Width="20" Height="20" IsActive="False" />
+                </tk:SettingsCard>
+                <tk:SettingsCard Header="Tüm uygulamaları güncelle" Description="Yoksayılanlar dışındaki tüm güncellemeleri sıraya alır" IsClickEnabled="True" Click="OnUpdateAll">
+                    <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xE896;" /></tk:SettingsCard.HeaderIcon>
+                </tk:SettingsCard>
+                <tk:SettingsCard Header="Önerilen gizlilik ayarlarını uygula" Description="Telemetri, öneriler, Bing araması, Copilot ve Recall kapatılır. Önce geri yükleme noktası alınır." IsClickEnabled="True" Click="OnRecommended">
+                    <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xE72E;" /></tk:SettingsCard.HeaderIcon>
+                </tk:SettingsCard>
+                <tk:SettingsCard Header="Disk temizliği" Description="Geçici dosyalar, güncelleme önbelleği, Geri Dönüşüm Kutusu" IsClickEnabled="True" Click="OnCleanup">
+                    <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xEA99;" /></tk:SettingsCard.HeaderIcon>
+                </tk:SettingsCard>
+                <tk:SettingsCard Header="Hazır paket kur" Description="Temel, geliştirici, ofis, oyuncu, tasarım paketleri tek tıkla" IsClickEnabled="True" Click="OnBundles">
+                    <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xE7B8;" /></tk:SettingsCard.HeaderIcon>
+                </tk:SettingsCard>
+            </StackPanel>
+
+            <TextBlock Style="{StaticResource SectionHeader}" Text="Bu bilgisayar" />
+            <Border Style="{StaticResource Card}">
+                <Grid ColumnSpacing="24" RowSpacing="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition /><RowDefinition /><RowDefinition /><RowDefinition /><RowDefinition /><RowDefinition />
+                    </Grid.RowDefinitions>
+                    <TextBlock Style="{StaticResource Caption}" Text="Cihaz adı" />
+                    <TextBlock x:Name="InfoMachine" Grid.Column="1" IsTextSelectionEnabled="True" />
+                    <TextBlock Grid.Row="1" Style="{StaticResource Caption}" Text="İşletim sistemi" />
+                    <TextBlock x:Name="InfoOs" Grid.Row="1" Grid.Column="1" IsTextSelectionEnabled="True" />
+                    <TextBlock Grid.Row="2" Style="{StaticResource Caption}" Text="İşlemci" />
+                    <TextBlock x:Name="InfoCpu" Grid.Row="2" Grid.Column="1" IsTextSelectionEnabled="True" />
+                    <TextBlock Grid.Row="3" Style="{StaticResource Caption}" Text="Açık kalma süresi" />
+                    <TextBlock x:Name="InfoUptime" Grid.Row="3" Grid.Column="1" />
+                    <TextBlock Grid.Row="4" Style="{StaticResource Caption}" Text="Sürücüler" />
+                    <TextBlock x:Name="InfoDrives" Grid.Row="4" Grid.Column="1" TextWrapping="Wrap" />
+                    <TextBlock Grid.Row="5" VerticalAlignment="Center" Style="{StaticResource Caption}" Text="IP adresi" />
+                    <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Spacing="6">
+                        <TextBlock x:Name="InfoIp" VerticalAlignment="Center" FontFamily="Cascadia Mono,Consolas" IsTextSelectionEnabled="True" />
+                        <Button x:Name="IpEye" Padding="6,4" Background="Transparent" BorderThickness="0" Click="OnIpEye"
+                                AutomationProperties.Name="IP adresini göster" ToolTipService.ToolTip="IP adresini göster">
+                            <FontIcon x:Name="IpEyeIcon" FontSize="14" Glyph="&#xE7B3;" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

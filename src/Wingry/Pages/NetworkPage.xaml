@@ -1,0 +1,42 @@
+<Page
+    x:Class="Wingry.Pages.NetworkPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:tk="using:CommunityToolkit.WinUI.Controls">
+
+    <ScrollViewer>
+        <StackPanel MaxWidth="{StaticResource PageMaxWidth}" Padding="{StaticResource PagePadding}" Spacing="{StaticResource SettingsCardSpacing}">
+            <TextBlock Style="{StaticResource PageTitle}" Text="Ağ" />
+            <TextBlock Style="{StaticResource PageSubtitle}" Text="DNS sunucusu seçimi, DNS önbelleği, ağ ayarlarını sıfırlama ve kayıtlı Wi-Fi şifreleri." />
+
+            <TextBlock Style="{StaticResource SectionHeader}" Margin="1,0,0,8" Text="Bağlantılar ve DNS" />
+            <StackPanel x:Name="Adapters" Spacing="{StaticResource SettingsCardSpacing}" />
+
+            <TextBlock Style="{StaticResource SectionHeader}" Text="Bakım" />
+            <tk:SettingsCard Header="DNS önbelleğini temizle" Description="Bir site yanlış adrese gidiyor ya da açılmıyorsa ilk denenecek şey. Yönetici gerekmez.">
+                <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xE74D;" /></tk:SettingsCard.HeaderIcon>
+                <Button Content="Temizle" Click="OnFlush" />
+            </tk:SettingsCard>
+            <tk:SettingsCard Header="Ağ ayarlarını sıfırla" Description="Winsock ve TCP/IP yığınını sıfırlar. İnternet hiç çalışmıyorsa kullanın; yeniden başlatma gerekir, VPN/proxy ayarlarını yeniden yapmanız gerekebilir.">
+                <tk:SettingsCard.HeaderIcon><FontIcon Glyph="&#xE7BA;" /></tk:SettingsCard.HeaderIcon>
+                <Button Content="Sıfırla" Click="OnReset" />
+            </tk:SettingsCard>
+
+            <TextBlock Style="{StaticResource SectionHeader}" Text="Kayıtlı Wi-Fi ağları" />
+            <tk:SettingsExpander x:Name="WifiExpander" Header="Wi-Fi şifreleri" Description="Bu bilgisayarın daha önce bağlandığı ağlar ve şifreleri. Şifreleri görmek yönetici izni ister.">
+                <tk:SettingsExpander.HeaderIcon><FontIcon Glyph="&#xE701;" /></tk:SettingsExpander.HeaderIcon>
+                <tk:SettingsExpander.Content>
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <ProgressRing x:Name="WifiRing" Width="20" Height="20" IsActive="False" />
+                        <Button x:Name="WifiBtn" Content="Şifreleri göster" Click="OnWifi" />
+                    </StackPanel>
+                </tk:SettingsExpander.Content>
+                <tk:SettingsExpander.Items>
+                    <tk:SettingsCard ContentAlignment="Left">
+                        <StackPanel x:Name="WifiList" Spacing="6" MinWidth="520" />
+                    </tk:SettingsCard>
+                </tk:SettingsExpander.Items>
+            </tk:SettingsExpander>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
