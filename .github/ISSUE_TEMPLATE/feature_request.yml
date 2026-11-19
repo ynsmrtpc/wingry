@@ -1,0 +1,21 @@
+name: Feature request / Özellik isteği
+description: Suggest an idea or improvement. / Bir fikir ya da iyileştirme önerin.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve? / Hangi sorunu çözer?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Your idea / Fikriniz
+      description: How should it work? / Nasıl çalışmalı?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you considered / Düşündüğünüz alternatifler

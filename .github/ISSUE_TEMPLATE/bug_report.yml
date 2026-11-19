@@ -1,0 +1,47 @@
+name: Bug report / Hata bildirimi
+description: Something doesn't work as expected. / Bir şey beklendiği gibi çalışmıyor.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this. You can write in English or Turkish.
+        Bildirdiğiniz için teşekkürler. İngilizce ya da Türkçe yazabilirsiniz.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened? / Ne oldu?
+      description: What did you do, what did you expect, and what happened instead? / Ne yaptınız, ne bekliyordunuz, ne oldu?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce / Tekrarlama adımları
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Wingry version / Wingry sürümü
+      description: Settings > About, or the release you downloaded. / Ayarlar > Hakkında ya da indirdiğiniz sürüm.
+      placeholder: v1.0.0
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version / Windows sürümü
+      description: Run `winver`. / `winver` komutunu çalıştırın.
+      placeholder: Windows 11 24H2 (26100.xxxx)
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Screenshots or logs / Ekran görüntüsü ya da günlük
+      description: Optional. Drag files here. / İsteğe bağlı. Dosyaları buraya sürükleyin.
